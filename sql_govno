@@ -1,0 +1,47 @@
+create table authors_t (
+  author_id int(10),
+  author_name varchar(50));
+  
+ create table books (
+  book_id int(10),
+  book_title varchar(50));
+   
+ create table temp (
+   author_name varchar(50),
+   book_title varchar(50),
+   union_authors varchar(150));
+
+
+insert into authors_t (author_id, author_name)
+values (1, "Стивен Кинг");
+insert into authors_t (author_id, author_name)
+values ('2', 'Александр Беляев');
+insert into authors_t (author_id, author_name)
+values ('3', 'Бернар Вербер');
+insert into authors_t (author_id, author_name)
+values ('4', 'Александр Лукьяненко');
+insert into authors_t (author_id, author_name)
+values ('5', 'Джордж Оруэлл');
+
+
+insert into authors_t (author_id, author_name)
+values (1, "Темная башня");
+insert into authors (author_id, author_name)
+values ('2', 'Продавец воздуха');
+insert into authors (author_id, author_name)
+values ('3', 'Танотонавты');
+insert into authors (author_id, author_name)
+values ('4', 'Фальшивые зеркала');
+insert into authors (author_id, author_name)
+values ('5', '1984');
+
+insert into temp(author_name)
+select * from authors_t
+where author_id = '1'
+
+insert into temp(book_title)
+select * from books
+where book_id = '1'
+
+select * from temp
+where (select distinct(book_title) from temp) >= 2;
